@@ -370,8 +370,12 @@
     width: 260px;
     height: 70px;
     border-radius: 999px;
-    background: linear-gradient(180deg, #fff, #ffe8f3);
-    border: 1px solid rgba(0,0,0,.08);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,255,255,.9), transparent 60%),
+    radial-gradient(circle at 80% 0%, rgba(255,255,255,.85), transparent 60%),
+    linear-gradient(180deg, #fff7fd, #ffe0f1);
+  border: 1px solid rgba(255,255,255,.9);
+  box-shadow: 0 12px 20px rgba(255,95,162,.18);
   }
   
   .cake-body{
@@ -419,8 +423,11 @@
     width: 290px;
     height: 30px;
     border-radius: 999px;
-    background: linear-gradient(180deg, #ffffff, #f2f7ff);
-    border: 1px solid rgba(0,0,0,.08);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.9), transparent 70%),
+    linear-gradient(180deg, #ffffff, #f2f7ff);
+  border: 1px solid rgba(255,255,255,.9);
+  box-shadow: 0 22px 34px rgba(255,95,162,.25);
   }
   
   /* Reveal: Happy Birthday + Balloons */
