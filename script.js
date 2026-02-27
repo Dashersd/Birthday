@@ -41,8 +41,8 @@ const screens = {
   function buildDefaultMessage(name) {
     const n = name ? `, ${name}` : "";
     return `Happiest birthday${n}! 🎂💗
-  You’re super special and you make life sweeter like strawberry candy 🍓✨
-  Wishing you cute moments, warm smiles, and lots of love today!`;
+  Thank you for being so warm and easy to vibe with on the live. 🍓✨
+  I hope today brings you good energy, small happy moments, and lots of reasons to smile. 💌`;
   }
   
   // ===== Countdown =====
