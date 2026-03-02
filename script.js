@@ -368,6 +368,11 @@ const screens = {
     return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   }
 
+  function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      (navigator.maxTouchPoints > 0 && window.innerWidth < 1024);
+  }
+
   function shouldShowInstall() {
     if (isStandalone()) return false;
     try {
@@ -379,6 +384,12 @@ const screens = {
   function showInstallBanner() {
     if (!shouldShowInstall() || !installBanner) return;
     installBanner.classList.add("show");
+  }
+
+  function showIosHint() {
+    if (!shouldShowInstall() || !installIosHint) return;
+    installIosHint.style.display = "block";
+    installIosHint.classList.add("show");
   }
 
   // Register service worker (needed for install prompt to fire on Chrome)
@@ -396,12 +407,20 @@ const screens = {
     showInstallBanner();
   });
 
-  // Always show Install / Not now banner after a short delay (so user sees the pop-up even if beforeinstallprompt is delayed or never fires)
-  if (!isIos() && installBanner) {
-    setTimeout(showInstallBanner, 2000);
+  // Mobile: show install message automatically (pop-up style) after short delay
+  // Desktop: show banner after longer delay
+  const installDelayMs = isMobile() ? 800 : 2000;
+  if (installBanner || installIosHint) {
+    setTimeout(() => {
+      if (isIos()) {
+        showIosHint();
+      } else if (installBanner) {
+        showInstallBanner();
+      }
+    }, installDelayMs);
   }
 
-  if (installBtn) {
+  // If browser fires beforeinstallprompt (e.g. Chrome Android), also show banner then
     installBtn.addEventListener("click", async () => {
       if (deferredInstallPrompt) {
         deferredInstallPrompt.prompt();
@@ -422,11 +441,7 @@ const screens = {
     });
   }
 
-  // iOS: show "Add to Home Screen" hint (no beforeinstallprompt on Safari)
-  if (isIos() && shouldShowInstall() && installIosHint) {
-    installIosHint.style.display = "block";
-    installIosHint.classList.add("show");
-  }
+  // iOS: dismiss handler
   if (installIosDismiss) {
     installIosDismiss.addEventListener("click", () => {
       if (installIosHint) {
