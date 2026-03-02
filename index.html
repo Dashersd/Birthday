@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#ff5fa2" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -13,9 +14,12 @@
   <link rel="apple-touch-icon" href="/icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@400;600;800;900&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <!-- Confetti Canvas -->
   <canvas id="confetti"></canvas>
@@ -89,6 +93,10 @@
           <button id="btn-blow" class="btn ghost">Blow (Tap) 💨</button>
         </div>
 
+        <div id="mic-indicator" class="mic-indicator" style="display:none;">
+          <div id="mic-bar" class="mic-bar"></div>
+        </div>
+
         <p id="mic-status" class="tiny-note">
           Tip: Click “Enable Mic” then blow near your mic. If mic is blocked, use Blow (Tap).
         </p>
@@ -132,11 +140,7 @@
           <button id="btn-next" class="btn primary">Next ➜</button>
         </div>
 
-        <audio
-          id="music"
-          src="HAPPY BIRTHDAY TO YOU _ PIANO INSTRUMENTAL _ BEST HAPPY BITHDAY MUSIC 2021.mp3"
-          preload="auto"
-        ></audio>
+        <audio id="music" src="/birthday_music.mp3" preload="auto"></audio>
       </div>
     </section>
 
@@ -160,9 +164,7 @@
           </button>
 
           <div id="reveal" class="reveal">
-            <img class="reveal-img"
-                 src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-                 alt="Cute celebration GIF"/>
+            <img class="reveal-img" src="/reveal_image.png" alt="Cute birthday celebration cat" />
             <p id="final-text" class="final-text">You’re amazing! 💖</p>
             <button id="btn-restart" class="btn ghost">Restart ♻</button>
           </div>
@@ -191,11 +193,13 @@
   </div>
   <div id="install-ios-hint" class="install-ios-hint" aria-live="polite" style="display:none;">
     <div class="install-ios-inner">
-      <span>Add to Home Screen: tap the <strong>Share</strong> button <span class="share-icon" aria-hidden="true">⎙</span> then “Add to Home Screen”</span>
+      <span>Add to Home Screen: tap the <strong>Share</strong> button <span class="share-icon"
+          aria-hidden="true">⎙</span> then “Add to Home Screen”</span>
       <button id="install-ios-dismiss" type="button" class="install-ios-dismiss" aria-label="Dismiss">×</button>
     </div>
   </div>
 
   <script type="module" src="script.js"></script>
 </body>
+
 </html>
