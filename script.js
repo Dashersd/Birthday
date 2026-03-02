@@ -421,6 +421,7 @@ const screens = {
   }
 
   // If browser fires beforeinstallprompt (e.g. Chrome Android), also show banner then
+  if (installBtn) {
     installBtn.addEventListener("click", async () => {
       if (deferredInstallPrompt) {
         deferredInstallPrompt.prompt();

@@ -1,0 +1,24 @@
+{
+  "name": "Kawaii Birthday Surprise",
+  "short_name": "Birthday",
+  "description": "Kawaii, animated birthday greeting with candle blow and surprise",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff0f6",
+  "theme_color": "#ff5fa2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

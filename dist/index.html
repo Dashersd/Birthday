@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="theme-color" content="#ff5fa2" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Birthday" />
+  <title>Kawaii Birthday Surprise</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="apple-touch-icon" href="/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/index-DW7S57Hf.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CUCStxQn.css">
+</head>
+<body>
+  <!-- Confetti Canvas -->
+  <canvas id="confetti"></canvas>
+
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="sparkle">✨</span>
+        <span class="brand-text">Kawaii Birthday System</span>
+        <span class="sparkle">✨</span>
+      </div>
+    </header>
+
+    <!-- 1) START -->
+    <section id="screen-start" class="screen active">
+      <div class="card big">
+        <div class="kawaii-face">
+          <div class="blush left"></div>
+          <div class="blush right"></div>
+          <div class="eyes">
+            <span class="eye"></span>
+            <span class="eye"></span>
+          </div>
+          <div class="mouth"></div>
+        </div>
+
+        <h1 class="title">Birthday Surprise! 🎂</h1>
+        <p class="subtitle">Enter your name for a cute surprise 💗</p>
+
+        <div class="form">
+          <label class="label">
+            Name
+            <input id="input-name" class="input" type="text" placeholder="" maxlength="24" />
+          </label>
+
+          <button id="btn-start" class="btn primary">
+            Start Surprise 🎁
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2) COUNTDOWN -->
+    <section id="screen-countdown" class="screen">
+      <div class="card">
+        <h2 class="title small">Get ready…</h2>
+        <div id="count-number" class="count">3</div>
+        <p class="subtitle">A magical surprise is loading ✨</p>
+      </div>
+    </section>
+
+    <!-- 3) CAKE + CANDLE -->
+    <section id="screen-cake" class="screen">
+      <div class="card big">
+        <h2 class="title small">Make a wish… 🥺✨</h2>
+        <p class="subtitle">Blow the candle to reveal the surprise 🎂</p>
+
+        <div class="cake-wrap">
+          <div class="cake">
+            <div id="flame" class="flame"></div>
+            <div class="candle"></div>
+
+            <div class="cake-top"></div>
+            <div class="cake-body"></div>
+            <div class="cake-base"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <button id="btn-mic" class="btn primary">Enable Mic 🎤</button>
+          <button id="btn-blow" class="btn ghost">Blow (Tap) 💨</button>
+        </div>
+
+        <p id="mic-status" class="tiny-note">
+          Tip: Click “Enable Mic” then blow near your mic. If mic is blocked, use Blow (Tap).
+        </p>
+
+        <!-- Happy Birthday reveal + balloons -->
+        <div id="hb-reveal" class="hb-reveal">
+          <div class="hb-text">HAPPY BIRTHDAY 🎉</div>
+          <div class="balloons">
+            <span class="balloon"></span>
+            <span class="balloon"></span>
+            <span class="balloon"></span>
+            <span class="balloon"></span>
+            <span class="balloon"></span>
+            <span class="balloon"></span>
+            <span class="balloon"></span>
+            <span class="balloon"></span>
+            <span class="balloon"></span>
+            <span class="balloon"></span>
+          </div>
+        </div>
+
+        <div class="row center">
+          <button id="btn-continue" class="btn primary" style="display:none;">Continue ➜</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) GREETING -->
+    <section id="screen-greeting" class="screen">
+      <div class="card big">
+        <h2 id="greet-title" class="title">Happy Birthday! 🎉</h2>
+        <p class="subtitle">Message incoming… 💌</p>
+
+        <div class="message-box">
+          <p id="typed-message" class="typed"></p>
+          <span id="cursor" class="cursor">▍</span>
+        </div>
+
+        <div class="row">
+          <button id="btn-music" class="btn ghost">Play Music 🎶</button>
+          <button id="btn-next" class="btn primary">Next ➜</button>
+        </div>
+
+        <audio
+          id="music"
+          src="/assets/HAPPY%20BIRTHDAY%20TO%20YOU%20_%20PIANO%20INSTRUMENTAL%20_%20BEST%20HAPPY%20BITHDAY%20MUSIC%202021-DghU0f7j.mp3"
+          preload="auto"
+        ></audio>
+      </div>
+    </section>
+
+    <!-- 5) GIFT -->
+    <section id="screen-gift" class="screen">
+      <div class="card big">
+        <h2 class="title small">Tap the gift! 🎀</h2>
+        <p class="subtitle">Open it for the final surprise 💗</p>
+
+        <div class="gift-area">
+          <button id="gift" class="gift" aria-label="Open gift">
+            <div class="gift-lid"></div>
+            <div class="gift-bow">
+              <div class="bow-left"></div>
+              <div class="bow-right"></div>
+              <div class="bow-knot"></div>
+            </div>
+            <div class="gift-box"></div>
+            <div class="gift-ribbon-v"></div>
+            <div class="gift-ribbon-h"></div>
+          </button>
+
+          <div id="reveal" class="reveal">
+            <img class="reveal-img"
+                 src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
+                 alt="Cute celebration GIF"/>
+            <p id="final-text" class="final-text">You’re amazing! 💖</p>
+            <button id="btn-restart" class="btn ghost">Restart ♻</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Made by: Dash</span>
+    </footer>
+  </main>
+
+  <!-- PWA Install banner (optional; app works without installing) -->
+  <div id="install-banner" class="install-banner" aria-live="polite">
+    <div class="install-banner-inner">
+      <span class="install-banner-icon">📱</span>
+      <div class="install-banner-text">
+        <strong>Install app</strong>
+        <span>Get the full experience on your home screen</span>
+      </div>
+      <div class="install-banner-actions">
+        <button id="install-btn" type="button" class="btn primary">Install</button>
+        <button id="install-dismiss" type="button" class="btn ghost">Not now</button>
+      </div>
+    </div>
+  </div>
+  <div id="install-ios-hint" class="install-ios-hint" aria-live="polite" style="display:none;">
+    <div class="install-ios-inner">
+      <span>Add to Home Screen: tap the <strong>Share</strong> button <span class="share-icon" aria-hidden="true">⎙</span> then “Add to Home Screen”</span>
+      <button id="install-ios-dismiss" type="button" class="install-ios-dismiss" aria-label="Dismiss">×</button>
+    </div>
+  </div>
+
+</body>
+</html>
