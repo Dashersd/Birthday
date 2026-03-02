@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="theme-color" content="#ff5fa2" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Birthday" />
   <title>Kawaii Birthday Surprise</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="apple-touch-icon" href="/icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet" />
@@ -167,6 +174,27 @@
       <span>Made by: Dash</span>
     </footer>
   </main>
+
+  <!-- PWA Install banner (optional; app works without installing) -->
+  <div id="install-banner" class="install-banner" aria-live="polite">
+    <div class="install-banner-inner">
+      <span class="install-banner-icon">📱</span>
+      <div class="install-banner-text">
+        <strong>Install app</strong>
+        <span>Get the full experience on your home screen</span>
+      </div>
+      <div class="install-banner-actions">
+        <button id="install-btn" type="button" class="btn primary">Install</button>
+        <button id="install-dismiss" type="button" class="btn ghost">Not now</button>
+      </div>
+    </div>
+  </div>
+  <div id="install-ios-hint" class="install-ios-hint" aria-live="polite" style="display:none;">
+    <div class="install-ios-inner">
+      <span>Add to Home Screen: tap the <strong>Share</strong> button <span class="share-icon" aria-hidden="true">⎙</span> then “Add to Home Screen”</span>
+      <button id="install-ios-dismiss" type="button" class="install-ios-dismiss" aria-label="Dismiss">×</button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

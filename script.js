@@ -341,11 +341,77 @@ const screens = {
     stopMic();
     reveal.classList.remove("show");
     giftBtn.classList.remove("open");
-  
+
     music.pause();
     btnMusic.textContent = "Play Music 🎶";
-  
+
     inputName.value = "";
-  
+
     showScreen("start");
   });
+
+  // ===== PWA Install prompt (optional install; app runs either way) =====
+  const installBanner = document.getElementById("install-banner");
+  const installBtn = document.getElementById("install-btn");
+  const installDismiss = document.getElementById("install-dismiss");
+  const installIosHint = document.getElementById("install-ios-hint");
+  const installIosDismiss = document.getElementById("install-ios-dismiss");
+
+  const INSTALL_DISMISS_KEY = "birthday-install-dismissed";
+
+  function isStandalone() {
+    return window.matchMedia("(display-mode: standalone)").matches ||
+      window.navigator.standalone === true;
+  }
+
+  function isIos() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  }
+
+  function shouldShowInstall() {
+    if (isStandalone()) return false;
+    try {
+      if (sessionStorage.getItem(INSTALL_DISMISS_KEY) === "1") return false;
+    } catch (_) {}
+    return true;
+  }
+
+  let deferredInstallPrompt = null;
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+    if (shouldShowInstall() && installBanner) installBanner.classList.add("show");
+  });
+
+  if (installBtn) {
+    installBtn.addEventListener("click", async () => {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      const { outcome } = await deferredInstallPrompt.userChoice;
+      if (installBanner) installBanner.classList.remove("show");
+      deferredInstallPrompt = null;
+    });
+  }
+
+  if (installDismiss) {
+    installDismiss.addEventListener("click", () => {
+      if (installBanner) installBanner.classList.remove("show");
+      try { sessionStorage.setItem(INSTALL_DISMISS_KEY, "1"); } catch (_) {}
+    });
+  }
+
+  // iOS: show "Add to Home Screen" hint (no beforeinstallprompt on Safari)
+  if (isIos() && shouldShowInstall() && installIosHint) {
+    installIosHint.style.display = "block";
+    installIosHint.classList.add("show");
+  }
+  if (installIosDismiss) {
+    installIosDismiss.addEventListener("click", () => {
+      if (installIosHint) {
+        installIosHint.classList.remove("show");
+        installIosHint.style.display = "none";
+      }
+      try { sessionStorage.setItem(INSTALL_DISMISS_KEY, "1"); } catch (_) {}
+    });
+  }
