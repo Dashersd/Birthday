@@ -376,21 +376,42 @@ const screens = {
     return true;
   }
 
+  function showInstallBanner() {
+    if (!shouldShowInstall() || !installBanner) return;
+    installBanner.classList.add("show");
+  }
+
+  // Register service worker (needed for install prompt to fire on Chrome)
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    });
+  }
+
   let deferredInstallPrompt = null;
 
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredInstallPrompt = e;
-    if (shouldShowInstall() && installBanner) installBanner.classList.add("show");
+    showInstallBanner();
   });
+
+  // Always show Install / Not now banner after a short delay (so user sees the pop-up even if beforeinstallprompt is delayed or never fires)
+  if (!isIos() && installBanner) {
+    setTimeout(showInstallBanner, 2000);
+  }
 
   if (installBtn) {
     installBtn.addEventListener("click", async () => {
-      if (!deferredInstallPrompt) return;
-      deferredInstallPrompt.prompt();
-      const { outcome } = await deferredInstallPrompt.userChoice;
-      if (installBanner) installBanner.classList.remove("show");
-      deferredInstallPrompt = null;
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        const { outcome } = await deferredInstallPrompt.userChoice;
+        if (installBanner) installBanner.classList.remove("show");
+        deferredInstallPrompt = null;
+      } else {
+        if (installBanner) installBanner.classList.remove("show");
+        alert("To install: use your browser menu (⋮ or ⋯) and look for \"Install\" or \"Add to Home Screen\".");
+      }
     });
   }
 
